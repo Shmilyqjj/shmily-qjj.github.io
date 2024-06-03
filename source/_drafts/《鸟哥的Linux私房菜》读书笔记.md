@@ -298,6 +298,9 @@ date: 2020-08-22 12:19:00
         find /mnt/disk1/tmp/ -mtime +7 -name "*.txt" -type f -print -delete >> /mnt/disk1/tmp/delete.log  删除目录下7天前的txt文件并将删除记录输出到log
 17.进入目录需要x权限，在目录下ls需要r权限，读取文件需要对其路径上的目录有x权限对文件有r权限，修改文件需要对其路径上的目录有x权限对文件有rw权限
 18.在目录下创建一个文件需要的权限：对该目录有wx权限
+19.查看进程使用的环境变量
+  cat /proc/$PID/environ
+  如果是java进程除了以上命令 也可以用 jinfo $PID
 ```
 
 ## 第七章 Linux磁盘与文件系统管理
