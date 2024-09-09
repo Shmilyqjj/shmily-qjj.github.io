@@ -683,8 +683,6 @@ vim exclude_list.txt 内容如下:
 *.log
 *.log.*
 ```
-(4)只同步部分文件
-rsync --delete --include="as/" --include="dir/*" -avzP src tgt
 
 
 ## 参考资料  
