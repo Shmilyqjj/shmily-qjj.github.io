@@ -292,6 +292,7 @@ date: 2020-08-22 12:19:00
         find ~ -perm 4777 -o -name aaa 找权限为4777的或名称为aaa的文件或目录（-o表示or）
         find ~ -type f -a ! -user shmily -exec ls -lh {} \;  找类型为文件的且所有者非shmily的文件并执行ll -h输出信息（！表示非）
         find . -name '*.jar' -exec jar -tvf {} \; | grep gson  查看当前目录下引用gson的jar  （依赖apt install unzip openjdk-8-jdk）
+        find . -name "*.jar" -exec sh -c 'jar tf {} | grep -q "keyword" && echo {}' \;  找含关键字的jar文件
         rm -f $(find . -type f -name "core.*" -mtime +100)  删除当前目录下修改时间为100天以前的前缀为core.文件
         rm -f $(find . -type f -name "*.txt" -o -name "*.csv" -mtime +100) 删除当前目录下修改时间为100天以前的后缀为txt或csv的文件
         find /path/path -type f -name "*.txt" -o -name "*.csv" -mtime +99 | xargs rm  删除/path/path目录下修改时间为99天以前的后缀为txt或csv的文件(不能放在shell)
