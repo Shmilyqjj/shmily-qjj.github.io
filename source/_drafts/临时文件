@@ -2390,16 +2390,16 @@ K8S相关
 kubectl get pod -o wide -n trino --show-labels=true
 
 # 配置HPA 自动伸缩 (根据内存和CPU使用率)
-apiVersion: autoscaling/v2beta1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: rcv5-collector-release
+  name: xxx-collector-release
   namespace:  xldc
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: rcv5-collector-release
+    name: xxx-collector-release
   minReplicas: 5
   maxReplicas: 20
   metrics:
@@ -2412,8 +2412,8 @@ spec:
       name: memory
       targetAverageUtilization: 70
 查看HPA
-kubectl -n xldc get hpa | grep rcv5-collector-release
-kubectl -n xldc get hpa -o yaml | grep rcv5-collector-release
+kubectl -n xldc get hpa | grep xxx-collector-release
+kubectl -n xldc get hpa -o yaml | grep xxx-collector-release
 
 -----------------------------------------------------------------------------
 Java相关
