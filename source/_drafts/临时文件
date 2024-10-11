@@ -2252,6 +2252,12 @@ docker search 搜索镜像
 docker tag 修改镜像名称和标签
 
 Docker容器相关命令:
+运行一个Docker容器使其保持住不退出
+docker run --name flink -p 8081:8081 -itd flink-1.14.5-oss tail -f /dev/null
+Docker查看container日志文件地址
+docker inspect --format='{{.LogPath}}' 993d50e1569d
+Docker日志文件保存到文件（近900分钟）
+docker logs --since 900m 993d50e1569d &> log.txt
 运行容器:
 docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
 杀死容器(强制kill，异常退出)
@@ -2377,6 +2383,38 @@ docker run -i -t almalinux:latest /bin/bash
 docker pull training/webapp
 docker run -d -P training/webapp python app.py  (-P 将容器内部使用的网络端口随机映射到主机上)
 docker run -d -p 5000:5000 training/webapp python app.py  (-p 设置容器内外端口映射)
+
+
+K8S相关
+# 查看pod对应宿主机
+kubectl get pod -o wide -n trino --show-labels=true
+
+# 配置HPA 自动伸缩 (根据内存和CPU使用率)
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: rcv5-collector-release
+  namespace:  xldc
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: rcv5-collector-release
+  minReplicas: 5
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      targetAverageUtilization: 70
+查看HPA
+kubectl -n xldc get hpa | grep rcv5-collector-release
+kubectl -n xldc get hpa -o yaml | grep rcv5-collector-release
+
 -----------------------------------------------------------------------------
 Java相关
 
