@@ -2295,6 +2295,8 @@ docker inspect 043500ec7fc2  |grep Id
 docker rm 5c0ac77c1d18
 查看容器端口映射
 docker port 043500ec7fc2 
+修改容器重启策略
+docker container update --restart=always 容器名
 将所有的悬空镜像输出（dangling 悬空=没有名字），含有状态、时间等等的信息
 docker images -f dangling=true 
 查看所有悬空镜像(名称为<none>的镜像) 只输出名字
