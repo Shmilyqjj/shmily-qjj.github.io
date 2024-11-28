@@ -2270,6 +2270,11 @@ docker ps
 docker ps -a
 查看最后一次创建的容器
 docker ps -l 
+解析已有容器的docker run命令
+```shell
+pip3 install runlike
+python /home/shmily/.local/lib/python3.12/site-packages/runlike/runlike.py -p container_name
+```
 启动已关闭的容器
 docker start 5c0ac77c1d18
 关闭运行中的容器
